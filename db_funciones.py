@@ -11,13 +11,19 @@ from config import DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_PORT, DB_SSLMODE
 DB_CONFIG_FILE = 'db_config.json'
 
 def get_db_credentials():
+    """
+    Obtiene las credenciales de la DB directamente de las variables de entorno.
+    Estas variables de entorno serán los "Secrets" configurados en Streamlit Community Cloud.
+    """
+    # Usamos .get() con un valor por defecto None por si alguna variable no está configurada,
+    # aunque Streamlit Community Cloud las requiere todas para el despliegue.
     return {
-        'DB_HOST': DB_HOST,
-        'DB_NAME': DB_NAME,
-        'DB_USER': DB_USER,
-        'DB_PASSWORD': DB_PASSWORD,
-        'DB_PORT': DB_PORT,
-        'DB_SSLMODE': DB_SSLMODE
+        'DB_HOST': os.getenv('DB_HOST'),
+        'DB_NAME': os.getenv('DB_NAME'),
+        'DB_USER': os.getenv('DB_USER'),
+        'DB_PASSWORD': os.getenv('DB_PASSWORD'),
+        'DB_PORT': int(os.getenv('DB_PORT', 5432)), # El puerto puede tener un valor por defecto numérico
+        'DB_SSLMODE': os.getenv('DB_SSLMODE', 'require') # El SSL mode puede tener un valor por defecto
     }
 
 def get_db_connection():
