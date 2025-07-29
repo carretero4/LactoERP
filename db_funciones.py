@@ -6,7 +6,7 @@ import os
 import secrets # Para generar tokens seguros
 from datetime import datetime, timedelta # Para manejar fechas de caducidad
 
-from config import DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_PORT, DB_SSLMODE
+#from config import DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_PORT, DB_SSLMODE
 
 DB_CONFIG_FILE = 'db_config.json'
 
